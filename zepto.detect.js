@@ -32,6 +32,14 @@
      *
      * @return (boolean) Whether or not the client supports a given feature.
     **/
+    function testInput (inputType) {
+        var i = document.createElement('input');
+
+        i.setAttribute('type', inputType);
+
+        return i.type !== 'text';
+    }
+
     $.extend($, {
         detect : {
             /*
@@ -75,61 +83,22 @@
 
             textareaPlaceholder : 'placeholder' in document.createElement('textarea'),
 
-            typeEmail : function () {
-                var i = document.createElement('input');
+            inputTypeEmail : testInput('email'),
 
-                i.setAttribute('type', 'email');
+            inputTypeNumber : testInput('number'),
 
-                return i.type !== 'text';
-            },
+            inputTypeSearch : testInput('search'),
 
-            typeNumber : function () {
-                var i = document.createElement('input');
+            inputTypeTel : testInput('tel'),
 
-                i.setAttribute('type', 'number');
-
-                return i.type !== 'text';
-            },
-
-            typeSearch : function () {
-                var i = document.createElement('input');
-
-                i.setAttribute('type', 'search');
-
-                return i.type !== 'text';
-            },
-
-            typeTel : function () {
-                var i = document.createElement('input');
-
-                i.setAttribute('type', 'tel');
-
-                return i.type !== 'text';
-            },
-
-            typeUrl : function () {
-                var i = document.createElement('input');
-
-                i.setAttribute('type', 'url');
-
-                return i.type !== 'text';
-            },
-
+            inputTypeUrl : testInput('url'),
 
             /*
              * Storage
             **/
             indexDB : !!window.indexedDB,
 
-            localStorage : function () {
-                try {
-                    return 'localStorage' in window && window['localStorage'] !== null;
-
-                } catch(e) {
-                    return false;
-
-                }
-            },
+            localStorage : 'localStorage' in window && window['localStorage'] !== null,
 
             webSQL : !!window.openDatabase,
 

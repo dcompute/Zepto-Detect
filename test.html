@@ -2,19 +2,64 @@
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Zepto Detect Test Suite</title>
+  <title>Zepto Detect, List Properties</title>
 
   <style media="screen">
-    .true { color: green; }
-    .false { color: red; }
+    body {
+      margin: 1em 0;
+      font-size: 1em;
+    }
+
+    h1 {
+      margin: auto 1em;
+      font-size: 1.25em;
+    }
+
+    h2 {
+      padding: .278em 1.111em;
+      background-color: #eee;
+      font-size: 1.125em;
+    }
+
+    ul {
+      font: normal normal 600 0.75em/1.6em Monaco, "Andale Mono", monospace;
+      list-style: none;
+      padding-left: 1.667em;
+    }
+
+    li span {
+      font-weight: 400;
+    }
+
+    li::before {
+      display: inline-block;
+      font-size: 1.5em;
+      width: 1.667em;
+    }
+
+    .true::before {
+      color: #0a0;
+      content: "\2713";
+    }
+
+    .false::before {
+      color: #d00;
+      content: "\2717";
+    }
+
+    .true span {
+      color: #0a0;
+    }
+
+    .false span {
+      color: #d00;
+    }
   </style>
 
 </head>
 <body>
 
-  <h1>Zepto Detect Test Suite</h1>
-
-  <hr>
+  <h1>Zepto Detect, List Properties</h1>
 
   <h2>Detect:</h2>
 
@@ -36,7 +81,7 @@
   <script>
     $(document).ready( function () {
       // Itterate through Detection object
-      function testProperties (object) {
+      function listProperties (object) {
         var collection = $[object],
             testList = $('#' + object),
             property,
@@ -51,11 +96,12 @@
               result = collection[property];
 
             }
+
             console.log(property + ': ' + result);
 
             testList.append(
-              '<li class="detect-' + property + '">' +
-                property + ': <span class="' + result + '">' + result + '</span>' +
+              '<li class="detect-' + property + ' ' + result + '">' +
+                property + ': <span>' + result + '</span>' +
               '</li>'
             );
 
@@ -66,8 +112,9 @@
       }
 
       // Run tests
-      testProperties("detect");
-      testProperties("device");
+      listProperties("detect");
+
+      listProperties("device");
 
 
     });
