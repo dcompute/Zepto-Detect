@@ -16,10 +16,23 @@
  * copies or substantial portions of the Software.
 **/
 (function ($) {
+    
+    /*
+     * Detect Suite
+     *
+     * Tests the client against a variety of modern browser features.
+     * These tests are primarily from Mark Pilgrim's "Dive Into HTML5" section
+     * "The All-In-One Almost-Alphabetical No-Bullshit Guide to Detecting
+     * Everything."
+     *
+     * You can find "Dive Into HTML5" here: http://www.diveintohtml5.net/
+     *
+     * "Dive Into HTML5" is protected by (CC BY 3.0):
+     * http://creativecommons.org/licenses/by/3.0/
+     *
+     * @return (boolean) Whether or not the client supports a given feature.
+    **/
     $.extend($, {
-        /*
-         * Return (boolean) of client browser capabilities.
-        **/
         detect : {
             /*
              * Elements.
@@ -133,17 +146,21 @@
              * Propietary features
             **/
             standalone : 'standalone' in window.navigator && window.navigator.standalone
-        },
+        }
+    });
 
-        /*
-         * Return (boolean) of likely client device classifications.
-        **/
+
+    /*
+     * Return (boolean) of likely client device classifications.
+    **/
+    $.extend($, {
         device : {
             mobile : (screen.width < 768),
 
-            tablet : (screen.width >= 768 && detect.orientation),
+            tablet : (screen.width >= 768 && $.detect.orientation),
 
-            desktop : (screen.width >= 800 && !detect.orientation)
+            desktop : (screen.width >= 800 && !$.detect.orientation)
         }
     });
+
 })(Zepto);

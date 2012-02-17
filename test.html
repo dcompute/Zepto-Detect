@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Zepto Detect Test Suite</title>
+
+  <style media="screen">
+    .true { color: green; }
+    .false { color: red; }
+  </style>
+
+</head>
+<body>
+
+  <h1>Zepto Detect Test Suite</h1>
+
+  <hr>
+
+  <h2>Detect:</h2>
+
+  <ul id="detect">
+  </ul>
+
+  <h2>Device:</h2>
+
+  <ul id="device">
+  </ul>
+
+  <!-- Zepto v0.8 -->
+  <script src="./lib/zepto.min.js"></script>
+
+  <!-- Zepto.Detect -->
+  <script src="./zepto.detect.js"></script>
+
+  <!-- Test -->
+  <script>
+    $(document).ready( function () {
+      // Itterate through Detection object
+      function testProperties (object) {
+        var collection = $[object],
+            testList = $('#' + object),
+            property,
+            result;
+
+        for (property in collection) {
+          if (collection.hasOwnProperty(property)) {
+            if (typeof collection[property] === "function") {
+              result = collection[property]();
+
+            } else {
+              result = collection[property];
+
+            }
+            console.log(property + ': ' + result);
+
+            testList.append(
+              '<li class="detect-' + property + '">' +
+                property + ': <span class="' + result + '">' + result + '</span>' +
+              '</li>'
+            );
+
+          }
+
+        }
+
+      }
+
+      // Run tests
+      testProperties("detect");
+      testProperties("device");
+
+
+    });
+
+  </script>
+</body>
+</html>
